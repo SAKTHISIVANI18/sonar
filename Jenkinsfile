@@ -18,17 +18,26 @@ pipeline {
          }
     }
 
-    // Static Code Analysis
     stage('Static Code Analysis') {
-      
-      
+  parallel {
+    stage('Backend') {
+      agent {
+        label "node"
+      }
       steps {
-        sh "echo 'Run Static Code Analysis'"
+        sh "ls -al"
+        }
       }
     }
-
-   
-
-    
+    stage('Frontend') {
+      agent {
+        label "node"
+      }
+      steps {
+          sh "ls -al"
+        }
+      }
+    }
   }
 }
+  
